@@ -86,7 +86,9 @@ O seguinte software é necessário para construir o ScalaFX:
 
 ------------------------------------------------------------------------------------------------------------------------
 O JOGO
- 
+
+Usando o intellij o usuário pode executar o object main na pasta GoL_Strategy e começar o jogo pela própria IDE. 
+
 Comece a jogar: File>New   (Isso criará uma matriz de celulas mortas)
 Clique nos quadrados para tornar as células vivas.
 O botão "Next Generation" criará a nova geração.
