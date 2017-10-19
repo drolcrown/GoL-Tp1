@@ -14,7 +14,7 @@ object GameEngine {
   val height = Main.height
   val width = Main.width
 
-  val rule = OriginalStrategy
+  var rule = OriginalStrategy
 
   /**
 	 * Calcula uma nova geracao do ambiente. Essa implementacao utiliza o
@@ -107,13 +107,14 @@ object GameEngine {
 	 * 
 	 * @return  numero de celulas vivas.
 	 */
-  def numberOfAliveCells {
+  def numberOfAliveCells : Int = {
     var aliveCells = 0
     for(line <- (0 until height)) {
       for(column <- (0 until width)) {
         if(isCellAlive(line, column)) aliveCells += 1
       }
     }
+    return aliveCells
   }
   
   /*
