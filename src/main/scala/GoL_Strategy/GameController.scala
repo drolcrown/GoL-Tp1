@@ -2,6 +2,8 @@ package GoL_Strategy
 
 import GoL_Stategy.View
 
+import scalafx.scene.paint.Color
+
 /**
  * Relaciona o componente View com o componente Model. 
  * 
@@ -34,21 +36,21 @@ object GameController {
 		  }
 		}
   }
-  
-  def nextGeneration {
+
+  def nextGeneration(color : Color) {
     Caretaker.persist
     GameEngine.nextGeneration
-    View.updateChart
+    View.updateChart(color)
   }
 
-  def goBack: Unit = {
+  def goBack(color: Color): Unit = {
     Caretaker.undo
-    View.updateChart
+    View.updateChart(color)
   }
 
-  def goFoward: Unit ={
+  def goFoward(color: Color): Unit ={
     Caretaker.redo
-    View.updateChart
+    View.updateChart(color)
   }
   
 }

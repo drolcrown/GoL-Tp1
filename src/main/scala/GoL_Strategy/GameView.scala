@@ -1,6 +1,8 @@
 package GoL_Strategy
 
 import scala.io.StdIn.{readInt, readLine}
+import scala.util.Random
+import scalafx.scene.paint.Color
 
 /**
  * Representa o componente View do GoL
@@ -80,7 +82,18 @@ object GameView {
     GameController.makeCellAlive(line, column)
 	}
 
-  private def nextGeneration = GameController.nextGeneration
+	private def colorRandom() : Color = {
+		var rand = new Random()
+		return rand.nextInt(5) match {
+			case 1 => Color.Red
+			case 2 => Color.Aquamarine
+			case 3 => Color.Green
+			case 4 => Color.DarkOrange
+			case 0 => Color.Gold
+		}
+	}
+
+  private def nextGeneration = GameController.nextGeneration(colorRandom())
   private def halt = GameController.halt
 	
   private def validPosition(line: Int, column: Int): Boolean = {

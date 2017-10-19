@@ -6,6 +6,7 @@ import javafx.scene.text.{Font, Text}
 import GoL_Strategy.{CellsRepository, GameController, GameEngine, Main}
 import Rules.{HighLife, Immortal, NewSetup, OriginalStrategy}
 
+import scala.util.Random
 import scalafx.application.JFXApp
 import scalafx.scene.{Node, Scene}
 import scalafx.scene.control._
@@ -30,10 +31,10 @@ object View extends JFXApp {
 
   startHome()
 
-  def updateChart: Unit = {
+  def updateChart(color : Color): Unit = {
     for (i <- 0 until View.height) {
       for (j <- 0 until View.width) {
-        cell(i)(j).fill = if (CellsRepository(i, j).isAlive) Color.Blue else Color.Gray
+        cell(i)(j).fill = if (CellsRepository(i, j).isAlive) color else Color.Gray
       }
     }
   }
@@ -106,7 +107,19 @@ object View extends JFXApp {
     }
   }
 
+  def colorRandom() : Color = {
+    var rand = new Random()
+    return rand.nextInt(5) match {
+      case 1 => Color.Red
+      case 2 => Color.Aquamarine
+      case 3 => Color.Green
+      case 4 => Color.DarkOrange
+      case 0 => Color.Gold
+    }
+  }
+
   def startChart(): Unit = {
+    var newColor = colorRandom()
     stage = new JFXApp.PrimaryStage {
       /** anonymus interclass **/
       title = "Game of Life"
@@ -158,7 +171,7 @@ object View extends JFXApp {
         playB.layoutY = 440
         playB.setFont(Font.font("Tahoma", FontWeight.Black, 12))
 
-        playB.onAction = (event: ActionEvent) => GameController.nextGeneration
+        playB.onAction = (event: ActionEvent) => GameController.nextGeneration(newColor)
 
         val haltB = new Button("HALT")
         haltB.layoutX = 65
@@ -172,13 +185,13 @@ object View extends JFXApp {
         undoB.layoutY = 470
         undoB.setFont(Font.font("Tahoma", FontWeight.Black, 12))
 
-        undoB.onAction = (event: ActionEvent) => GameController.goBack
+        undoB.onAction = (event: ActionEvent) => GameController.goBack(newColor)
 
         val redoB = new Button("REDO")
         redoB.layoutX = 65
         redoB.layoutY = 470
         redoB.setFont(Font.font("Tahoma", FontWeight.Black, 12))
-        redoB.onAction = (event: ActionEvent) => GameController.goFoward
+        redoB.onAction = (event: ActionEvent) => GameController.goFoward(newColor)
 
         val infB = new Button("AUTOGENERATE")
         infB.layoutX = 7
@@ -191,13 +204,25 @@ object View extends JFXApp {
         stopB.layoutY = 250
         stopB.setFont(Font.font("Tahoma", FontWeight.Black, 15))
 
+        val pulsB = new Button("PULSAR")
+        pulsB.layoutX = 20
+        pulsB.layoutY = 240
+        pulsB.setFont(Font.font("Tahoma", FontWeight.Black, 10))
+        pulsB.onAction = (event: ActionEvent) => {updateChart(newColor)}
+
+        val glidB = new Button("GLIDER")
+        glidB.layoutX = 65
+        glidB.layoutY = 340
+        glidB.setFont(Font.font("Tahoma", FontWeight.Black, 10))
+        glidB.onAction = (event: ActionEvent) => autoGenerate()
+
         def autoGenerate() {
           title.value = "Game of Life"
           var timer = new Timer();
           //Criando um timer para o generate
           timer.schedule(new TimerTask() {
             def run() {
-              GameController.nextGeneration;
+              GameController.nextGeneration(newColor)
             }
           }, 0, 800)
           content = List(menuBar, stopB)
@@ -211,7 +236,7 @@ object View extends JFXApp {
           stopB.onAction = (event: ActionEvent) => {timer.cancel(); View.startChart()}
         }
 
-        content = List(menuBar, playB, haltB, undoB, redoB, manualB, autoB, infB)
+        content = List(menuBar, playB, haltB, undoB, redoB, manualB, autoB, infB, pulsB)
 
         //Matrix
         for (i <- 0 until View.height) {
