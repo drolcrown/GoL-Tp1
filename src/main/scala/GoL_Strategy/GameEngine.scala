@@ -14,7 +14,7 @@ object GameEngine {
   val height = Main.height
   val width = Main.width
 
-  var rule = OriginalStrategy
+  var rule : DerivationStrategy = _
 
   /**
 	 * Calcula uma nova geracao do ambiente. Essa implementacao utiliza o

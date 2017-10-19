@@ -1,6 +1,4 @@
-package Rules
-
-import GoL_Strategy.{CellsRepository, DerivationStrategy, GameEngine}
+package GoL_Original
 
 /**
   * Created by RafaelSouza on 04/10/2017.

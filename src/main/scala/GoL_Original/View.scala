@@ -97,9 +97,9 @@ object View extends JFXApp {
 
       originIt.onAction = (event: ActionEvent) => {GameEngine.rule = OriginalStrategy}
 
-      highIt.onAction = (event: ActionEvent) => {GameEngine.rule = Rules.HighLife}
+      highIt.onAction = (event: ActionEvent) => {GameEngine.rule = HighLife}
 
-      immortIt.onAction = (event: ActionEvent) => {GameEngine.rule = Rules.Immortal}
+      immortIt.onAction = (event: ActionEvent) => {GameEngine.rule = Immortal}
 
       //TODO
       importIt.onAction = (event: ActionEvent) => {val ppSc = new PopupSearch}
