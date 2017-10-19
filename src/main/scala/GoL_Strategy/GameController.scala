@@ -10,7 +10,7 @@ import GoL_Stategy.View
 object GameController {
   
   def start {
-    CellsCaretaker.persist
+    Caretaker.persist
     //TODO
     GameView.update
   }
@@ -36,18 +36,18 @@ object GameController {
   }
   
   def nextGeneration {
-    CellsCaretaker.persist
+    Caretaker.persist
     GameEngine.nextGeneration
     View.updateChart
   }
 
   def goBack: Unit = {
-    CellsCaretaker.undo
+    Caretaker.undo
     View.updateChart
   }
 
   def goFoward: Unit ={
-    CellsCaretaker.redo
+    Caretaker.redo
     View.updateChart
   }
   

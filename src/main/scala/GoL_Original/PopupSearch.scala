@@ -27,7 +27,7 @@ class PopupSearch {
       try {
         val fileContents = Source.fromFile(filePath).getLines.mkString
         println(fileContents)
-        GameEngine.rule = new NewSetup(fileContents(0).asDigit, fileContents(1).asDigit, fileContents(2).asDigit)
+        //GameEngine.rule = new NewSetup(fileContents(0).asDigit, fileContents(1).asDigit, fileContents(2).asDigit)
       } catch {
         case ex: Exception => {val ppError = new PopupError(filePath)}
       }

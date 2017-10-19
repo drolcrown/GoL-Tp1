@@ -1,5 +1,5 @@
 package Rules
-import GoL_Original.{DerivationStrategy, CellsRepository, GameEngine}
+import GoL_Strategy.{DerivationStrategy, CellsRepository, GameEngine}
 
 /**
   * Created by RafaelSouza on 09/10/2017.

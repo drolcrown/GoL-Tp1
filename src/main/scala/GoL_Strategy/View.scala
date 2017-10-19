@@ -15,6 +15,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape._
 import scalafx.Includes._
 import scalafx.event.ActionEvent
+import scalafx.scene.layout.HBox
 import scalafx.scene.text.FontWeight
 
 /**
@@ -38,17 +39,41 @@ object View extends JFXApp {
   }
 
   //TODO: Implementar regra direito
-  def newRule(param1: Int, param2: Int, param3: Int, param4: Int) {
-    val newRule = new NewSetup()
-    newRule.shouldKeepAlive(3, 8)
-    newRule.shouldRevive(3, 5)
-
+  def newRule() {
     stage = new JFXApp.PrimaryStage {
       title.value = "Game of Life"
       scene = new Scene(650, 570) {
-        val reviveB = new Label("Insert the number of Neighbors Alive")
-        val number = new TextField()
-        content = List(reviveB, number)
+
+        var label = new Button("Number of Neigborhs alive")
+        label.setFont(Font.font("Tahoma", FontWeight.BLACK, 30))
+        label.layoutX = 80
+        label.layoutY = 50
+
+        var label2 = new Button("Submit")
+        label2.layoutX = 250
+        label2.layoutY = 300
+
+        var textField = new TextField ()
+        textField.layoutX = 200
+        textField.layoutY = 150
+
+        var textField2 = new TextField ()
+        textField2.layoutX = 200
+        textField2.layoutY = 200
+
+        var textField3 = new TextField ()
+        textField3.layoutX = 200
+        textField3.layoutY = 250
+
+        label2.onAction = (event: ActionEvent) =>  {
+          var val3 = textField3.getText()
+          var val2 = textField2.getText()
+          var val1 = textField.getText()
+          startChart()
+          GameEngine.rule =  new NewSetup(val1.toInt, val2.toInt, val3.toInt)
+        }
+
+        content = List(label, label2, textField, textField2, textField3)
       }
     }
   }
@@ -174,7 +199,7 @@ object View extends JFXApp {
             def run() {
               GameController.nextGeneration;
             }
-          }, 0, 1000)
+          }, 0, 800)
           content = List(menuBar, stopB)
           for (i <- 0 until View.height) {
             for (j <- 0 until View.width) {
@@ -224,7 +249,7 @@ object View extends JFXApp {
               val newSetupB = new RadioButton("New Strategy")
               newSetupB.layoutX = 250
               newSetupB.layoutY = 400
-              newSetupB.onAction = (event: ActionEvent) => {View.startChart()}
+              newSetupB.onAction = (event: ActionEvent) => {newRule()}
               //newRule(ev1, ev2, ev3, ev4)
 
               manualB.onAction = (event: ActionEvent) => {CellsRepository.clear; startHomeChart(true)}

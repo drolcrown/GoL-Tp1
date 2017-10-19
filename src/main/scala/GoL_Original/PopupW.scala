@@ -57,7 +57,7 @@ class PopupW {
   result match  {
     case Some(Result(min, max, revive))       => {
       println("Minimum: " + min + " Maximum: " + max + " Revive: " + revive)
-      GameEngine.rule = new NewSetup(min.toInt, max.toInt, revive.toInt)
+     // GameEngine.rule = new NewSetup(min.toInt, max.toInt, revive.toInt)
     }
     case _                                => println("Cancel or closed")
   }
